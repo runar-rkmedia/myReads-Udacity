@@ -1,11 +1,8 @@
 import * as React from 'react'
+import { bookShelves } from './Shelf'
 
-interface BookStatus {
-  shelf: 'none'|'wantToRead'|'currentlyReading'|'read'
-  text?: string
-}
-
-export interface BookInterface extends BookStatus {
+export interface BookInterface {
+  shelf: string
   title: string
   authors: string[]
   averageRating?: number
@@ -35,25 +32,8 @@ export interface BookInterface extends BookStatus {
 
 class Book extends React.Component<{
   book: BookInterface
+  onMoveBook: (book: BookInterface, event: React.ChangeEvent<HTMLSelectElement>) => void
 }> {
-  bookStatuses: BookStatus[] = [
-    {
-      shelf: 'none',
-      text: 'None'
-    },
-    {
-      shelf: 'wantToRead',
-      text: 'Want to read'
-    },
-    {
-      shelf: 'currentlyReading',
-      text: 'Currently Reading'
-    },
-    {
-      shelf: 'read',
-      text: 'Already read it'
-    },
-  ]
   render() {
     let book = this.props.book
     return (
@@ -66,13 +46,19 @@ class Book extends React.Component<{
             }}
           />
           <div className="book-shelf-changer">
-            <select>
-              <option value={book.shelf} disabled={true}>Move to...</option>
-              {this.bookStatuses.map(thisBookState => (
+            <select
+              value={book.shelf}
+              onChange={(e) => this.props.onMoveBook(book, e)}
+            >
+              <option
+                disabled={true}
+              >Move to...
+              </option>
+              {bookShelves.map(thisBookState => (
                 <option
                   key={thisBookState.shelf}
                   value={thisBookState.shelf}
-                >{thisBookState.text}
+                >{thisBookState.shelfText}
                 </option>
               ))}
             </select>
