@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Route, Link } from 'react-router-dom'
 import { debounce } from 'lodash'
-import Shelf from './Components/Shelf'
+import Search from './Components/Search'
 import ListShelves from './Components/ListShelves'
 import * as BooksAPI from './ext/BooksAPI'
 import { BookInterface } from './Components/Book'
@@ -71,44 +71,14 @@ class BooksApp extends React.Component {
         <Route
           path="/search"
           render={() => (
-            <div className="search-books">
-              <div className="search-books-bar">
-                <Link to="/" className="close-search">Close</Link>
-                <div className="search-books-input-wrapper">
-                  <input
-                    type="text"
-                    placeholder="Search by title or author"
-                    value={this.state.query}
-                    onChange={this.searchBooks}
-                  />
-                </div>
-              </div>
-              <div className="search-books-results">
-                {this.state.searchingBooks ? (
-                  <div className="center">
-                    <div className="loader" />
-                    Search in progress...
-                    </div>
-                ) :
-                  this.state.query &&
-                  this.state.query === this.state.lastQuery &&
-                  this.state.bookSearchResult.length === 0 ? (
-                    <p className="center">No result to show. You might want to search for something else.</p>
-                  ) : !this.state.query && (
-                    <p className="center">Write your searchquery above.</p>
-                  )
-                }
-                {!this.state.searchingBooks && (
-                  <ol className="books-grid" >
-                    <Shelf
-                      books={this.state.bookSearchResult}
-                      shelfName={`Search result for '${this.state.lastQuery}' (${this.state.bookSearchResult.length})`}
-                      onMoveBook={this.moveBook}
-                    />
-                  </ol>
-                )}
-              </div>
-            </div>
+            <Search
+              books={this.state.bookSearchResult}
+              searchingBooks={this.state.searchingBooks}
+              query={this.state.query}
+              lastQuery={this.state.lastQuery}
+              onSearch={this.searchBooks}
+              onMoveBook={this.moveBook}
+            />
           )}
         />
         <Route
