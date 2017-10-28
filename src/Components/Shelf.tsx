@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Book, { BookInterface } from './Book'
 
-export interface BookStatus {
+export interface BookShelf {
   shelf: 'none'|'wantToRead'|'currentlyReading'|'read'|undefined
   shelfText: string
 }
 
-export var bookShelves: BookStatus[] = [
+export var bookShelves: BookShelf[] = [
   {
     shelf: 'none',
     shelfText: 'Not in any list'
@@ -21,7 +21,7 @@ export var bookShelves: BookStatus[] = [
   },
   {
     shelf: 'read',
-    shelfText: 'Already read it'
+    shelfText: 'Previously read'
   }
 ]
 
@@ -41,7 +41,7 @@ class Shelf extends React.Component<{
           <ol className="books-grid">
             {this.props.books.map(
               (book: BookInterface) => {
-                return (<li key={book.title}>
+                return (<li key={book.id}>
                   <Book
                     book={book}
                     onMoveBook={this.props.onMoveBook}

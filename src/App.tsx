@@ -6,9 +6,11 @@ import './style/App.css'
 
 class BooksApp extends React.Component {
   state: {
+    loadingBooks: boolean
     books: BookInterface[]
     showSearchPage: boolean
   } = {
+    loadingBooks: false,
     books: [],
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -19,15 +21,21 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
   componentDidMount() {
+    this.setState({loadingBooks: true})
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
+      this.setState({loadingBooks: false})
     })
   }
   moveBook = (book: BookInterface, event: React.ChangeEvent<HTMLSelectElement>) => {
     let books = this.state.books.slice()
-    let i = books.indexOf(book)
-    books[i].shelf = event.target.value
+    let thisBook = books.find(b => b.id === book.id)
+    if (!thisBook) {
+      return
+    }
+    thisBook.shelf = event.target.value
     this.setState({books: books})
+    BooksAPI.update(thisBook, event.target.value)
   }
 
   render() {
@@ -56,10 +64,23 @@ class BooksApp extends React.Component {
           </div>
         ) : (
             <div className="list-books">
+
               <div className="list-books-title">
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
+                            {this.state.loadingBooks && (
+                              <div className="center">
+                              <div className="loader"/>
+                                Gathering your books...
+                              </div>
+                            )}
+                            {!this.state.loadingBooks && this.state.books.length === 0 && (
+                              <p className="center">
+                              No books to see here.
+                              Maybe you should add a few.
+                              I promise, it won't actually hurt your brain.</p>
+                            )}
                 {bookShelves.map(shelf => (
                   <Shelf
                     key={shelf.shelf}

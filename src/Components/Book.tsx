@@ -5,29 +5,30 @@ export interface BookInterface {
   shelf: string
   title: string
   authors: string[]
-  averageRating?: number
-  description?: string
+  averageRating: number
+  description: string
   imageLinks: {
     smallThumbnail: string
     thumbnail: string
   }
-  industryIdentifiers?: {
+  industryIdentifiers: {
     type: string
     identifier: string
   }[]
-  infoLink?: string
-  language?: string
-  maturityRatting?: string
-  pageCount?: number
-  panelizationSummary?: {
+  infoLink: string
+  language: string
+  maturityRatting: string
+  pageCount: number
+  panelizationSummary: {
     containsEpubBubbles: boolean
     containsImageBubbles: boolean
   }
-  previewLink?: string
-  printType?: string
-  publishedDate?: number
-  ratingsCount?: number
-  subtitle?: string
+  previewLink: string
+  printType: string
+  publishedDate: number
+  ratingsCount: number
+  subtitle: string
+  id: string
 }
 
 class Book extends React.Component<{
