@@ -6,25 +6,6 @@ export interface BookShelf {
   shelfText: string
 }
 
-export var bookShelves: BookShelf[] = [
-  {
-    shelf: 'none',
-    shelfText: 'Not in any list'
-  },
-  {
-    shelf: 'wantToRead',
-    shelfText: 'Want to read'
-  },
-  {
-    shelf: 'currentlyReading',
-    shelfText: 'Currently Reading'
-  },
-  {
-    shelf: 'read',
-    shelfText: 'Previously read'
-  }
-]
-
 class Shelf extends React.Component<{
   books: BookInterface[]
   shelfName: string

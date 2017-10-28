@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { bookShelves } from './Shelf'
+import { bookShelves } from './ListShelves'
 
 export interface BookInterface {
   shelf: string
