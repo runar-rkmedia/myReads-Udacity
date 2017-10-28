@@ -1,10 +1,14 @@
 import * as React from 'react'
-import Book from './Components/Book'
-// import * as BooksAPI from './BooksAPI'
+import Book, { BookInterface } from './Components/Book'
+import * as BooksAPI from './ext/BooksAPI'
 import './style/App.css'
 
 class BooksApp extends React.Component {
-  state = {
+  state: {
+    books: BookInterface[]
+    showSearchPage: boolean
+  } = {
+    books: [],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -12,6 +16,11 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false
+  }
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books: books})
+    })
   }
 
   render() {
@@ -49,35 +58,13 @@ class BooksApp extends React.Component {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                        <li>
-                        <Book
-                          backgroundImage="url( 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api')"
-                          bookTitle="The Mock a Mocker"
-                          bookAuthors="JJ Jay Jayson"
-                          status="wantToRead"
-                        />
-                        </li>
-                      <li>
-                        <div className="book">
-                          <div className="book-top">
-                            <div
-                                className="book-cover"
-                                style={{ width: 128, height: 188, backgroundImage: 'url("http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api")' }}
-                            />
-                            <div className="book-shelf-changer">
-                              <select>
-                                <option value="none" disabled={true}>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">Ender's Game</div>
-                          <div className="book-authors">Orson Scott Card</div>
-                        </div>
-                      </li>
+                        {this.state.books.filter(
+                          (book: BookInterface) => book.shelf === 'currentlyReading').map(
+                            (book: BookInterface) => {
+                              return (<li key={book.title}>
+                                <Book book={book} />
+                              </li>)
+                        })}
                       </ol>
                   </div>
                 </div>

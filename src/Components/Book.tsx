@@ -1,60 +1,85 @@
 import * as React from 'react'
 
 interface BookStatus {
-  status: 'none'|'wantToRead'|'currentlyReading'|'read'
+  shelf: 'none'|'wantToRead'|'currentlyReading'|'read'
   text?: string
 }
 
-interface BookInterface extends BookStatus {
-  backgroundImage?: string
-  bookTitle?: string
-  bookAuthors?: string
+export interface BookInterface extends BookStatus {
+  title: string
+  authors: string[]
+  averageRating?: number
+  description?: string
+  imageLinks: {
+    smallThumbnail: string
+    thumbnail: string
+  }
+  industryIdentifiers?: {
+    type: string
+    identifier: string
+  }[]
+  infoLink?: string
+  language?: string
+  maturityRatting?: string
+  pageCount?: number
+  panelizationSummary?: {
+    containsEpubBubbles: boolean
+    containsImageBubbles: boolean
+  }
+  previewLink?: string
+  printType?: string
+  publishedDate?: number
+  ratingsCount?: number
+  subtitle?: string
 }
 
-class Book extends React.Component<BookInterface> {
+class Book extends React.Component<{
+  book: BookInterface
+}> {
   bookStatuses: BookStatus[] = [
     {
-      status: 'none',
+      shelf: 'none',
       text: 'None'
     },
     {
-      status: 'wantToRead',
+      shelf: 'wantToRead',
       text: 'Want to read'
     },
     {
-      status: 'currentlyReading',
+      shelf: 'currentlyReading',
       text: 'Currently Reading'
     },
     {
-      status: 'read',
+      shelf: 'read',
       text: 'Already read it'
     },
   ]
   render() {
+    let book = this.props.book
     return (
       <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
             style={{
-              backgroundImage: this.props.backgroundImage
+              backgroundImage: `url("${book.imageLinks.thumbnail}")`
             }}
           />
           <div className="book-shelf-changer">
             <select>
-              <option value={this.props.status} disabled={true}>Move to...</option>
+              <option value={book.shelf} disabled={true}>Move to...</option>
               {this.bookStatuses.map(thisBookState => (
                 <option
-                  key={thisBookState.status}
-                  value={thisBookState.status}
+                  key={thisBookState.shelf}
+                  value={thisBookState.shelf}
                 >{thisBookState.text}
                 </option>
               ))}
             </select>
           </div>
         </div>
-        <div className="book-title">{this.props.bookTitle}</div>
-        <div className="book-authors">{this.props.bookAuthors}</div>
+        <div className="book-title">{book.title}</div>
+        <div className="book-authors">{book.authors}</div>
       </div>
 
     )
