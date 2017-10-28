@@ -1,9 +1,11 @@
 html, body, .root {
   height: 100%;
 }
+
 body {
   line-height: 1.5;
 }
+
 body, .app {
   background: white;
 }
@@ -15,6 +17,7 @@ body, .app {
   background: #2e7c31;
   text-align: center;
 }
+
 .list-books-title h1 {
   font-weight: 400;
   margin: 0;
@@ -39,6 +42,7 @@ body, .app {
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
 }
+
 .bookshelf-books {
   text-align: center;
 }
@@ -48,6 +52,7 @@ body, .app {
   right: 25px;
   bottom: 25px;
 }
+
 .open-search a {
   display: block;
   width: 50px;
@@ -58,7 +63,7 @@ body, .app {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   font-size: 0;
 }
 
@@ -71,12 +76,14 @@ body, .app {
   left: 0;
   z-index: 5;
   display: flex;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
 }
+
 .search-books-input-wrapper {
   flex: 1;
   background: #e9e;
 }
+
 .search-books-bar input {
   width: 100%;
   padding: 15px 10px;
@@ -109,11 +116,11 @@ body, .app {
   list-style-type: none;
   padding: 0;
   margin: 0;
-
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .books-grid li {
   padding: 10px 15px;
   text-align: left;
@@ -122,13 +129,15 @@ body, .app {
 .book {
   width: 140px;
 }
-.book-title,
-.book-authors {
+
+.book-title, .book-authors {
   font-size: 0.8em;
 }
+
 .book-title {
   margin-top: 10px;
 }
+
 .book-authors {
   color: #999;
 }
@@ -152,8 +161,9 @@ body, .app {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
 .book-shelf-changer select {
   width: 100%;
   height: 100%;
@@ -164,9 +174,12 @@ body, .app {
 /* book cover */
 
 .book-cover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: #eee;
+  width: 128px;
+  height: 193px;
 }
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;

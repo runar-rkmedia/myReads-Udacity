@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Book from './Components/Book'
 // import * as BooksAPI from './BooksAPI'
 import './style/App.css'
 
@@ -39,7 +40,7 @@ class BooksApp extends React.Component {
           </div>
         ) : (
             <div className="list-books">
-              <div className="list-books-title">
+              // <div className="list-books-title">
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
@@ -49,30 +50,12 @@ class BooksApp extends React.Component {
                     <div className="bookshelf-books">
                       <ol className="books-grid">
                         <li>
-                          <div className="book">
-                            <div className="book-top">
-                              <div
-                                className="book-cover"
-                                style={{
-                                  width: 128,
-                                  height: 193,
-                                  // eslint-disable-next-line
-                                  backgroundImage: 'url( "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")'
-                                  }}
-                              />
-                            <div className="book-shelf-changer">
-                              <select>
-                                <option value="none" disabled={true}>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">To Kill a Mockingbird</div>
-                          <div className="book-authors">Harper Lee</div>
-                          </div>
+                        <Book
+                          backgroundImage="url( 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api')"
+                          bookTitle="The Mock a Mocker"
+                          bookAuthors="JJ Jay Jayson"
+                          status="wantToRead"
+                        />
                         </li>
                       <li>
                         <div className="book">
