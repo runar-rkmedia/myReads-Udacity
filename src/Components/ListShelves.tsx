@@ -5,24 +5,29 @@ import { BookInterface } from './Book'
 export interface BookShelf {
   shelf: 'none' | 'wantToRead' | 'currentlyReading' | 'read' | undefined
   shelfText: string
+  showAsShelf: boolean
 }
 
 export var bookShelves: BookShelf[] = [
   {
     shelf: 'none',
-    shelfText: 'Not in any list'
+    shelfText: 'Not in any list (Remove)',
+    showAsShelf: false
   },
   {
     shelf: 'wantToRead',
-    shelfText: 'Want to read'
+    shelfText: 'Want to read',
+    showAsShelf: true
   },
   {
     shelf: 'currentlyReading',
-    shelfText: 'Currently Reading'
+    shelfText: 'Currently Reading',
+    showAsShelf: true
   },
   {
     shelf: 'read',
-    shelfText: 'Previously read'
+    shelfText: 'Previously read',
+    showAsShelf: true
   }
 ]
 class ListShelves extends React.Component<{
@@ -44,7 +49,7 @@ class ListShelves extends React.Component<{
             Maybe you should add a few.
             I promise, it won't actually hurt your brain.</p>
         )}
-        {bookShelves.map(shelf => (
+        {bookShelves.filter(shelf => shelf.showAsShelf).map(shelf => (
           <Shelf
             key={shelf.shelf}
             books={this.props.books.filter(
