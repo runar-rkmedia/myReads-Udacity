@@ -52,13 +52,21 @@ class BooksApp extends React.Component {
   }
 
   retrieveBookSearchResults(query: string) {
-    if ( !query || query === this.state.lastQuery) {
+    if (!query || query === this.state.lastQuery) {
       return
     }
     this.setState({ searchingBooks: true })
     BooksAPI.search(query).then((result: BookInterface[] & { error?: string }) => {
+      result = !result.error ? result : []
+      result = result.map((book) => {
+        let thisBook = this.state.books.find(b => b.id === book.id)
+        if (thisBook) {
+          return thisBook
+        }
+        return book
+      })
       this.setState({
-        bookSearchResult: result && !result.error ? result : [],
+        bookSearchResult: result,
         searchingBooks: false,
         lastQuery: query
       })
