@@ -45,7 +45,11 @@ let Book = (props: BookClassInterface) => {
         <BookCover thumbnail={imageURL} />
         <BookShelveChanger book={props.book} onMoveBook={props.onMoveBook} />
       </div>
-      <BookTitle title={props.book.title} url={props.book.previewLink} />
+      <BookTitle
+        title={props.book.title}
+        url={props.book.previewLink}
+        subtitle={props.book.subtitle}
+      />
       <BookAuthors authors={props.book.authors || []} />
     </div>
   )
@@ -53,17 +57,25 @@ let Book = (props: BookClassInterface) => {
 
 let BookTitle = (props: {
   title: string
+  subtitle?: string
   url?: string
 }) => (
-    props.url ? (
-      <div
-        onClick={() => { window.open(props.url) }}
-        className="book-title fake-link"
-      >{props.title}
-      </div>
-    ) : (
-        <div className="book-title" >{props.title}</div>
-      )
+    <div>
+      {props.url ? (
+        <div
+          onClick={() => { window.open(props.url) }}
+          className="book-title fake-link"
+        >{props.title}
+        </div>
+      ) : (
+          <div className="book-title" >{props.title}
+          </div>
+
+        )}
+      {props.subtitle && (
+        <div className="book-subtitle" >{props.subtitle}</div>
+      )}
+    </div>
 
   )
 
