@@ -30,36 +30,49 @@ export var bookShelves: BookShelf[] = [
     showAsShelf: true
   }
 ]
-class ListShelves extends React.Component<{
+let ListShelves = (props: {
   books: BookInterface[]
   loadingBooks: boolean
   onMoveBook: (book: BookInterface, event: React.ChangeEvent<HTMLSelectElement>) => void
-}> {
-  render() {
-    return (
-      <div className="list-books-content">
-        {this.props.loadingBooks ? (
-          <div className="center">
-            <div className="loader" />
-            Gathering your books...
-                      </div>
-        ) : this.props.books.length === 0 && (
-          <p className="center">
-            No books to see here.
+}) => (
+    <div className="list-books-content">
+      <ShelvesStatusText
+        numberOfResults={props.books.length}
+        loadingBooks={props.loadingBooks}
+      />
+      {bookShelves.filter(shelf => shelf.showAsShelf).map(shelf => (
+        <Shelf
+          key={shelf.shelf}
+          books={props.books.filter(
+            book => book.shelf === shelf.shelf)}
+          shelfName={shelf.shelfText}
+          onMoveBook={props.onMoveBook}
+        />
+      ))}
+    </div>
+  )
+
+let ShelvesStatusText = (props: {
+  numberOfResults: number
+  loadingBooks: boolean
+}) => {
+  let { numberOfResults, loadingBooks } = props
+  let text
+  if (loadingBooks) {
+    text = 'Gathering your books'
+  } else if (numberOfResults === 0) {
+    text = `No books to see here.
             Maybe you should add a few.
-            I promise, it won't actually hurt your brain.</p>
-        )}
-        {bookShelves.filter(shelf => shelf.showAsShelf).map(shelf => (
-          <Shelf
-            key={shelf.shelf}
-            books={this.props.books.filter(
-              book => book.shelf === shelf.shelf)}
-            shelfName={shelf.shelfText}
-            onMoveBook={this.props.onMoveBook}
-          />
-        ))}
-      </div>
-    )
+            I promise, it won't actually hurt your brain.`
   }
+  return (
+    <div className="center">
+      {loadingBooks && (
+        <div className="loader" />
+      )}
+      {text}
+    </div>
+  )
 }
+
 export default ListShelves
