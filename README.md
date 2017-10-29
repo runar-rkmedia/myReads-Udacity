@@ -1,3 +1,23 @@
+# MyReads
+
+This is an assignment in Udacity's React-course. To use the webapp, please fork or download it, and run the following from the terminal:
+
+```bash
+npm install
+npm run start
+```
+
+A browser window is automaticly opened.
+
+## Features
+
+- Put any book in any of your shelves (Currently Reading, Want to read, Previously read, or remove)
+- Search for other books (Note, the backendserver is simplified, so only some search-terms are valid. See [SEARCH_TERMS](https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md))
+- Add any book from search to any shelf.
+
+
+***
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -283,7 +303,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1769,7 +1789,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
